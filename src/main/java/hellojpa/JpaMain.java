@@ -15,9 +15,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member findMember1 = em.find(Member.class, 101L); // 영속성 컨텍스트
-            Member findMember2 = em.find(Member.class, 101L); // 1차 캐시에서 조회
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
 
+            em.persist(member1);
+            em.persist(member2);
+            // 여기까지 INSERT SQL을 DB에 보내지 않는다.
+
+            System.out.println("=======");
+
+            // 커밋하는 순간 데이터베이스에 INSERT 쿼리를 보낸다.
             tx.commit();
         } catch(Exception e) {
             tx.rollback();
