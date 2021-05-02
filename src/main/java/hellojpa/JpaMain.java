@@ -15,15 +15,8 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 비영속
-            Member member = new Member();
-            member.setId(100L);
-            member.setName("Hello JPA");
-
-            // 영속
-            System.out.println("=== BEFORE ===");
-            em.persist(member);
-            System.out.println("=== AFTER ===");
+            Member findMember1 = em.find(Member.class, 101L); // 영속성 컨텍스트
+            Member findMember2 = em.find(Member.class, 101L); // 1차 캐시에서 조회
 
             tx.commit();
         } catch(Exception e) {
