@@ -16,22 +16,15 @@ public class JpaMain {
 
         try {
 
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
             Member member = new Member();
             member.setUsername("member1");
-            member.changeTeam(team); // 연관관계 편의 메서드
             em.persist(member);
 
-//            team.getMembers().add(member);
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
 
-//            em.flush();
-//            em.clear();
-
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
+            em.persist(team);
 
             tx.commit();
         } catch(Exception e) {
