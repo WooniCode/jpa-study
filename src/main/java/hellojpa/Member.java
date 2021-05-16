@@ -12,9 +12,9 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    private Team team;
 
     public Long getId() {
         return id;
@@ -32,11 +32,12 @@ public class Member extends BaseEntity {
         this.username = username;
     }
 
-    public Locker getLocker() {
-        return locker;
+
+    public Team getTeam() {
+        return team;
     }
 
-    public void setLocker(Locker locker) {
-        this.locker = locker;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
