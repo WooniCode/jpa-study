@@ -12,7 +12,7 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // EAGER는 실무에서 쓰면 안된다. 테이블 수십 개 써야하면 난리남...
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
